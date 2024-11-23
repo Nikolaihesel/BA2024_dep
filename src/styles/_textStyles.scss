@@ -1,0 +1,21 @@
+@use 'variables' as *;
+
+@mixin font-style($weight, $style: normal, $color: null, $size: null) {
+	font-family: $primFont;
+	font-weight: $weight;
+	font-style: $style;
+	font-size: $size;
+
+	@if $color != null {
+		color: $color;
+	}
+
+	@if $size != null {
+		font-size: size;
+	}
+}
+
+//example usage in another stylesheet
+.activeLink {
+	@include font-style(700, normal, $defaultLight);
+}

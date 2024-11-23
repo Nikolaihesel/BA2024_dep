@@ -1,0 +1,39 @@
+@use '../../styles/variables.scss' as v;
+@use '../../styles/textStyles.scss' as t;
+
+.navlink {
+	@include t.font-style(700, normal, v.$inactiveLight, 25px);
+	text-decoration: none;
+	transition: color 0.3s ease;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.5rem;
+
+	&:hover {
+		@include t.font-style(700, normal, v.$defaultLight, 25px);
+		opacity: 0.8;
+	}
+
+	i {
+		text-decoration: none;
+	}
+}
+
+.navlinkActive {
+	@include t.font-style(700, normal, v.$defaultLight, 25px);
+	text-decoration: none;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.5rem;
+
+	i {
+		text-decoration: none;
+	}
+}
