@@ -1,0 +1,39 @@
+@use '../../styles/variables.scss' as *;
+@use '../../styles/textStyles.scss' as *;
+
+.nav {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 12em;
+	margin: auto;
+	margin: 2em 0;
+}
+
+.titleHeader {
+	@include font-style(400, normal, $defaultLight, 28px);
+	flex: 1;
+	position: relative;
+	z-index: 1;
+
+	&:before {
+		content: '';
+		height: 44px;
+		width: 44px;
+		background: $accentColor;
+		position: absolute;
+		top: 0;
+		left: -8px;
+		border-radius: 50%;
+		z-index: -1;
+	}
+}
+
+ul {
+	flex: 3;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}

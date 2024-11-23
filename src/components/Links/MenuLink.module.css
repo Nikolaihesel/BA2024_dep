@@ -6,9 +6,24 @@
   color: #fff;
 }
 
+.navlinkWrapper {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navlink {
   font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-style: normal;
   font-size: 25px;
   color: #82848f;
@@ -18,13 +33,14 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: 1.5em;
   padding: 0.5rem;
+  width: 200px;
 }
 .navlink:hover {
   font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-style: normal;
   font-size: 25px;
   color: #fff;
@@ -37,7 +53,7 @@
 
 .navlinkActive {
   font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-style: normal;
   font-size: 25px;
   color: #fff;
@@ -46,10 +62,48 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: 1.5em;
   padding: 0.5rem;
+  width: 200px;
 }
 .navlinkActive i {
   text-decoration: none;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+.submenu .submenuLink {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #82848f;
+  font-size: size;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2em;
+}
+.submenu .submenuActive {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #fff;
+  font-size: size;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2em;
 }/*# sourceMappingURL=MenuLink.module.css.map */

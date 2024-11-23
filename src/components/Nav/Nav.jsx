@@ -1,3 +1,5 @@
+import style from './Nav.module.scss';
+
 import MenuLink from '../Links/MenuLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBraille } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +9,8 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 const Nav = () => {
 	return (
-		<div>
+		<div className={style.nav}>
+			<h1 className={style.titleHeader}>Sofie Portalen</h1>
 			<ul>
 				<li>
 					<MenuLink
@@ -19,21 +22,25 @@ const Nav = () => {
 				<li>
 					<MenuLink
 						NavText='Users'
-						Param='home'
+						Param='user'
 						Icon={<FontAwesomeIcon icon={faUser} />}
+						SubMenu={[
+							{ label: 'Add User', path: '/user/add-user' },
+							{ label: 'Edit User', path: '/user/edit-user' },
+						]}
 					/>
 				</li>
 				<li>
 					<MenuLink
 						NavText='Machines'
-						Param='home'
+						Param='machines'
 						Icon={<FontAwesomeIcon icon={faDesktop} />}
 					/>
 				</li>
 				<li>
 					<MenuLink
 						NavText='Restart'
-						Param='home'
+						Param='restart'
 						Icon={<FontAwesomeIcon icon={faPowerOff} />}
 					/>
 				</li>
