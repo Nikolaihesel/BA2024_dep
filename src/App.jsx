@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import './App.scss';
 
 import Nav from './components/Nav/Nav';
+import SocketTest from './components/SocketTest';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 			Main={
 				<>
 					<Outlet />
+					<SocketTest />
 				</>
 			}
 		/>
