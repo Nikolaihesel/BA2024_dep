@@ -1,0 +1,45 @@
+@use '../../styles/variables' as *;
+@use '../../styles/textStyles' as *;
+
+.container {
+	background-color: $darkerTint;
+	border-radius: 12px;
+	padding: 16px;
+	overflow: hidden;
+	width: 100%;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+
+	thead {
+		th {
+			@include font-style(600, normal, $primColor, 16px);
+			color: $primColor;
+			padding: 12px;
+			background-color: #f8fafc;
+			text-transform: capitalize;
+		}
+	}
+
+	tbody {
+		tr {
+			&:nth-child(even) {
+				background-color: #f0f4f8;
+			}
+
+			&:hover {
+				background-color: #e5e9f0;
+			}
+
+			td {
+				padding: 12px;
+				@include font-style(400, normal, $primColor, 14px);
+				color: $primColor;
+				word-break: break-word;
+			}
+		}
+	}
+}

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import ErrorPage from './Errorpage.jsx';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { element } from 'prop-types';
+import Portal from './views/Portal.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -10,7 +12,7 @@ const router = createBrowserRouter([
 		element: <App />,
 		errorElement: <ErrorPage />,
 		children: [
-			{ index: true, element: <h1>Welcome Home</h1> },
+			{ index: true, element: <Portal /> },
 			{
 				path: 'user',
 				element: (

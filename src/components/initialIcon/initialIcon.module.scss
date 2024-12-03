@@ -1,0 +1,18 @@
+@use '../../styles/variables.scss' as *;
+@use '../../styles/textStyles.scss' as *;
+
+.initialIcon {
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+	background: $accentColor;
+	padding: 1em;
+	border-radius: 50%;
+	height: 44px;
+	width: 44px;
+
+	p {
+		@include font-style(500, normal, $defaultLight, 18px);
+	}
+}

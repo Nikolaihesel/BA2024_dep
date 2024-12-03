@@ -1,0 +1,8 @@
+@use '../../styles/variables.scss' as *;
+@use '../../styles/textStyles.scss' as *;
+
+.portalInfo {
+	flex: 2.5;
+	height: 100%;
+	background: $darkerTint;
+}
