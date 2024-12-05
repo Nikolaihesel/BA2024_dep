@@ -1,0 +1,27 @@
+@use '../../styles/textStyles' as *;
+@use '../../styles/variables' as *;
+
+.machineTimer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: space-between;
+	margin: 1em;
+	gap: 0.5em;
+	width: 80%;
+}
+
+.title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1em;
+
+	p {
+		@include font-style(300, normal, $primColor, 12px);
+	}
+
+	hr {
+		border: solid 2px #eceff5;
+	}
+}

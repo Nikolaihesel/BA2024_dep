@@ -1,0 +1,72 @@
+@use '../styles/textStyles' as *;
+@use '../styles/variables.scss' as *;
+
+.container {
+	width: 100%;
+	background-color: $darkerTint;
+	padding: 16px;
+	border-radius: 12px;
+}
+
+.title {
+	@include font-style(600, normal, $primColor, 24px);
+	margin-bottom: 16px;
+}
+
+.table {
+	width: 100%;
+	height: 100%;
+	border-collapse: collapse;
+	text-align: left;
+	overflow: auto;
+
+	thead {
+		th {
+			@include font-style(600, normal, $primColor, 16px);
+			padding: 12px 16px;
+			text-transform: capitalize;
+			background-color: $darkerTint;
+			color: $primColor;
+		}
+	}
+
+	tbody {
+		tr {
+			&:nth-child(even) {
+				background-color: #f4f6f9;
+			}
+
+			&:hover {
+				background-color: #e9edf3;
+			}
+
+			td {
+				padding: 12px 16px;
+				@include font-style(400, normal, $primColor, 14px);
+				color: $inactiveLight;
+
+				&.userCell {
+					display: flex;
+					align-items: center;
+					gap: 12px;
+
+					svg {
+						flex-shrink: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+.editButton {
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	.editIcon {
+		fill: $accentColor;
+		width: 20px;
+		height: 20px;
+	}
+}

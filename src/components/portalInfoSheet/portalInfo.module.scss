@@ -5,4 +5,19 @@
 	flex: 2.5;
 	height: 100%;
 	background: $darkerTint;
+	box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.2);
+	margin: 2em 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 2em;
+}
+
+.portalInfoHeader {
+	@include font-style(300, normal, $primColor, 20px);
+	margin-top: 2em;
+	width: 80%;
+	display: flex;
+	justify-content: flex-start;
 }

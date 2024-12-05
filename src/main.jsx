@@ -5,6 +5,7 @@ import ErrorPage from './Errorpage.jsx';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { element } from 'prop-types';
 import Portal from './views/Portal.jsx';
+import UserView from './views/UserView.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
 					</>
 				),
 				children: [
-					{ index: true },
+					{ index: true, element: <UserView /> },
 					{
 						path: 'add-user',
 						element: <h1>Add User</h1>,

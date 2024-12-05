@@ -1,0 +1,57 @@
+@use '../../styles/variables' as *;
+@use '../../styles/textStyles' as *;
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2em;
+	padding: 2em 1em;
+	width: 70%;
+	background: $primColor;
+	border-radius: 18px;
+}
+
+.header {
+	@include font-style(600, normal, $defaultLight, 18px);
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.text {
+	@include font-style(300, normal, $defaultLight, 12px);
+	opacity: 0.7;
+}
+
+.titleHeader {
+	@include font-style(400, normal, $defaultLight, 28px);
+
+	flex: 1;
+	position: relative;
+	z-index: 1;
+
+	&:before {
+		content: '';
+		height: 44px;
+		width: 44px;
+		background: $accentColor;
+		position: absolute;
+		top: 0;
+		left: -8px;
+		border-radius: 50%;
+		z-index: -1;
+	}
+}
+
+.sendMail {
+	padding: 0.5em;
+	width: 80%;
+	background: $accentColor;
+	@include font-style(400, normal, $defaultLight, 16px);
+	border: none;
+
+	border-radius: 8px;
+}
