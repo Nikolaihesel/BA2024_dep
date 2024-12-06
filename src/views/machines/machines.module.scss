@@ -1,0 +1,143 @@
+@use '../../styles/textStyles' as *;
+@use '../../styles/variables' as *;
+.rowWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.portalWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1em 6em;
+	height: 100%;
+	flex: 5;
+	overflow: auto;
+
+	hr {
+		width: 100%;
+		border: 1px solid #dedede;
+	}
+}
+
+.menuHeaderWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 1em 0;
+}
+
+.menuHeader {
+	@include font-style(600, normal, $primColor, 16px);
+}
+
+.thinFont {
+	@include font-style(200, normal, $primColor, 16px);
+	padding-left: 0.5em;
+}
+
+.iconWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.3em;
+
+	p {
+		@include font-style(300, normal, $primColor, 12px);
+	}
+}
+
+.userInfoWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 1em 0;
+	margin-bottom: 2em;
+}
+
+.userAccessWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	width: 100%;
+	padding: 1em 0;
+	margin-bottom: 2em;
+}
+
+.machineAccessInfo {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
+
+	padding: 1em;
+}
+
+.selectButton {
+	padding: 1em 0.5em;
+	background: #eceff5;
+	border: none;
+	border-radius: 8px;
+	@include font-style(400, normal, $primColor, 16px);
+	cursor: pointer;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	transition: 0.1s ease-in;
+	min-width: 200px;
+
+	&:hover {
+		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+		filter: (brightness(0.8));
+	}
+}
+
+.unitWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+
+	width: 100%;
+	padding: 1em 0;
+
+	.unit {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 1em;
+
+		margin: 1em;
+		border-radius: 12px;
+		overflow: auto;
+		max-height: 400px;
+		flex-basis: 45%;
+		background: $darkerTint;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+		position: relative;
+
+		.unitTitle {
+			@include font-style(400, normal, $defaultLight, 16px);
+			width: 100%;
+			background: $primColor;
+			position: sticky;
+			top: 0;
+			padding: 0.5em;
+			filter: brightness(2);
+		}
+	}
+}

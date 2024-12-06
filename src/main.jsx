@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { element } from 'prop-types';
 import Portal from './views/Portal.jsx';
 import UserView from './views/UserView.jsx';
+import Machines from './views/machines/Machines.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'machines',
-				element: <h1>Machines</h1>,
+				element: <Machines />,
 			},
 			{
 				path: 'restart',
