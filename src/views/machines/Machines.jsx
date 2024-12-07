@@ -9,7 +9,12 @@ const Machines = () => {
 			<div className={style.portalWrapper}>
 				<div className={style.menuHeaderWrapper}>
 					<p className={style.menuHeader}>
-						User <span className={style.thinFont}> AFD lyd </span>
+						User
+						<select className={style.thinFont}>
+							<option value='Afd Lyd'> Afd. Lyd </option>
+							<option value='Afd D'> Afd. D </option>
+							<option value='Afd S'> Afd. S </option>
+						</select>
 					</p>
 
 					<div className={style.iconWrapper}>

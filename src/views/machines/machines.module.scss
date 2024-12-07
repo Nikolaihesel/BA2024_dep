@@ -40,7 +40,9 @@
 
 .thinFont {
 	@include font-style(200, normal, $primColor, 16px);
-	padding-left: 0.5em;
+	padding: 0 1em;
+	border-radius: 8px;
+	border: solid $inactiveLight 0.5px;
 }
 
 .iconWrapper {
@@ -138,6 +140,7 @@
 			top: 0;
 			padding: 0.5em;
 			filter: brightness(2);
+			z-index: 1;
 		}
 	}
 }
