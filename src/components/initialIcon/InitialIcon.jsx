@@ -3,7 +3,7 @@ import style from './initialIcon.module.scss';
 const InitialIcon = ({ Initial }) => {
 	return (
 		<div className={style.initialIcon}>
-			<p>{Initial}</p>
+			<p>{Initial.toUpperCase()}</p>
 		</div>
 	);
 };

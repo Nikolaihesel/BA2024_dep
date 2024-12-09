@@ -6,13 +6,6 @@ class CreateUser {
 	}
 
 	async execute(userData) {
-		const existingUser = await this.userRepository.findByDepartment(
-			userData.department
-		);
-		if (existingUser) {
-			throw new Error('department already exist');
-		}
-
 		const existingUsername = await this.userRepository.findByUsername(
 			userData.username
 		);

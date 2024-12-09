@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './viewStyles.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -9,46 +9,74 @@ import useAuthStore from '../stores/AuthStore';
 
 const Portal = () => {
 	const { user, isAuthenticated } = useAuthStore();
+	const [room, setRoom] = useState([]);
+
+	const getRooms = async () => {
+		try {
+			const response = await fetch('http://localhost:3000/api/rooms/', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			const data = await response.json();
+			console.log(data);
+			setRoom(data.rooms);
+		} catch (error) {
+			console.error('Error fetching rooms:', error);
+		}
+	};
+
+	useEffect(() => {
+		getRooms();
+	}, []);
+
 	return (
 		<div className={style.rowWrapper}>
 			<div className={style.portalWrapper}>
 				<div className={style.menuHeaderWrapper}>
 					<p className={style.menuHeader}>
-						Current User{' '}
-						<span className={style.thinFont}> {user.username} </span>
+						Current User <span className={style.thinFont}>{user.username}</span>
 					</p>
-
-					<div className={style.iconWrapper}>
-						<FontAwesomeIcon icon={faUser} />
-						<p>Change user</p>
-					</div>
+					{user.role === 'admin' && (
+						<div className={style.iconWrapper}>
+							<FontAwesomeIcon icon={faUser} />
+							<p>Edit user</p>
+						</div>
+					)}
 				</div>
 				<hr />
 				<div className={style.userInfoWrapper}>
 					<InitialIcon Initial={user.username[0]} />
 					<p className={style.menuHeader}>
-						User ID <span className={style.thinFont}> AFVD </span>
+						Username: <span className={style.thinFont}>{user.username}</span>
 					</p>
 					<p className={style.menuHeader}>
-						Label <span className={style.thinFont}> Afv D </span>
-					</p>
-					<p className={style.menuHeader}>
-						Ember Target <span className={style.thinFont}> 001 </span>
+						Role: <span className={style.thinFont}>{user.role}</span>
 					</p>
 				</div>
 
 				<div className={style.userAccessWrapper}>
 					<div className={style.menuHeaderWrapper}>
 						<p className={style.menuHeader}>User Access Rights</p>
-						<div className={style.iconWrapper}>
-							<FontAwesomeIcon icon={faUser} />
-							<p>Edit Rights</p>
-						</div>
+						{user.role === 'admin' && (
+							<div className={style.iconWrapper}>
+								<FontAwesomeIcon icon={faUser} />
+								<p>Edit Rights</p>
+							</div>
+						)}
 					</div>
+
 					<hr />
 					<div className={style.machineAccessInfo}>
-						<MachineAccesInfo />
-						<MachineAccesInfo />
+						{room &&
+							room.length > 0 &&
+							room.map((room, index) => (
+								<MachineAccesInfo
+									key={index}
+									data={room}
+								/>
+							))}
 					</div>
 				</div>
 			</div>

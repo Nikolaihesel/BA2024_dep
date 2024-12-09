@@ -11,6 +11,7 @@ const userController = {
 
 		try {
 			const user = await createUser.execute(req.body);
+
 			res.status(201).json({ message: 'User registered successfully', user });
 		} catch (error) {
 			res.status(400).json({ message: error.message });

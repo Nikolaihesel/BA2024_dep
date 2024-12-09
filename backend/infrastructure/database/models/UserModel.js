@@ -15,8 +15,6 @@ const UserSchema = new mongoose.Schema({
 	department: {
 		type: String,
 		required: true,
-		unique: true,
-		trim: true,
 		lowercase: true,
 	},
 	role: {

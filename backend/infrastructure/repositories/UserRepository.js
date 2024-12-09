@@ -9,9 +9,6 @@ class UserRepository {
 		return await User.find().select('-password');
 	}
 
-	async findByDepartment(department) {
-		return await User.findOne({ department });
-	}
 	async findByRole(role) {
 		return await User.find({ role });
 	}

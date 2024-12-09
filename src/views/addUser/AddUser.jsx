@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './addUserWrapper.module.scss';
 
 const AddUser = () => {
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [role, setRole] = useState('');
+	const [department, setDepartment] = useState('');
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await fetch('http://localhost:3000/api/users/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ username, password, role, department }),
+			});
+
+			const data = await response.json();
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div className={style.addUserWrapper}>
 			<p className={style.heading}>Add New User</p>
@@ -14,6 +37,7 @@ const AddUser = () => {
 							<input
 								type='text'
 								placeholder='Username'
+								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</div>
 						<div className={style.inputAndLabel}>
@@ -21,6 +45,7 @@ const AddUser = () => {
 							<input
 								type='password'
 								placeholder='Password'
+								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</div>
 					</div>
@@ -30,7 +55,8 @@ const AddUser = () => {
 							<label htmlFor=''> Role</label>
 							<select
 								name='role'
-								id='role'>
+								id='role'
+								onChange={(e) => setRole(e.target.value)}>
 								<option initialvalue='true'>Select Role</option>
 								<option value='admin'>Admin</option>
 								<option value='user'>User</option>
@@ -40,7 +66,8 @@ const AddUser = () => {
 							<label htmlFor=''> Department</label>
 							<select
 								name='department'
-								id='department'>
+								id='department'
+								onChange={(e) => setDepartment(e.target.value)}>
 								<option initialvalue='true'>Select Department</option>
 								<option value='Afd Lyd'>Afd. Lyd</option>
 								<option value='Afd D'>Afd. D</option>
@@ -50,18 +77,19 @@ const AddUser = () => {
 					</div>
 				</div>
 				<hr />
+				<p className={style.subheading}>User Access Groups</p>
+
 				<div className={style.userAccesRights}>
-					<p className={style.subheading}>User Access Groups</p>
-
 					<p className={style.smallText}> Group Access Rights</p>
-					<button className={style.userButton}>Create Group</button>
-
-
-                    <div styleName={styles.wrapper}></div>
-            
-					<hr />
+					<div className={style.gap}>
+						<button className={style.userButton}>Create Group</button>
+						<button className={style.userButton}>Add To Existing Group</button>
+					</div>
 				</div>
+				<hr />
 			</form>
+
+			<button onClick={handleSubmit}>Create user</button>
 		</div>
 	);
 };

@@ -14,12 +14,14 @@
 	width: 100%;
 	border-collapse: collapse;
 	text-align: left;
+	overflow: auto;
 
 	thead {
 		th {
 			@include font-style(600, normal, $primColor, 16px);
 			color: $primColor;
 			padding: 12px;
+			min-width: 14ch;
 			background-color: #f8fafc;
 			text-transform: capitalize;
 		}
@@ -33,6 +35,7 @@
 
 			&:hover {
 				background-color: #e5e9f0;
+				cursor: pointer;
 			}
 
 			td {

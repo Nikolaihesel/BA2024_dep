@@ -49,8 +49,8 @@ const Table = () => {
 				<tbody>
 					{users &&
 						users.length > 0 &&
-						users.map((user) => (
-							<tr key={user.id}>
+						users.map((user, index) => (
+							<tr key={index}>
 								<td className={style.userCell}>
 									<InitialIcon Initial={user.username[0]} />
 									<span>{user.username}</span>
