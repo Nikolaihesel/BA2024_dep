@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import useAuthStore from '../stores/AuthStore';
-import './Login.scss';
+import style from './login.module.scss';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-
-	const login = useAuthStore((state) => state.login);
+	const { login, user: storedUser } = useAuthStore.getState();
 
 	const handleLogin = async () => {
 		setLoading(true);
+		setError('');
+
 		try {
 			const response = await fetch('http://localhost:3000/api/users/login', {
 				method: 'POST',
@@ -20,29 +21,31 @@ const Login = () => {
 				},
 				body: JSON.stringify({ username, password }),
 			});
-			const data = await response.json();
 
+			const data = await response.json();
 			if (response.ok) {
+				login(data.user, data.token);
 				setTimeout(() => {
 					setLoading(false);
-				}, 1500);
-				login(data.user, data.token);
+				}, 15000);
 			} else {
-				setError(data.message);
+				setError(data.message || 'Login failed');
+				setLoading(false);
 			}
 		} catch (error) {
 			setError('Noget gik galt');
+			setLoading(false);
 		}
 	};
 
 	return (
-		<div className='login-page'>
-			<div className='form-wrapper'>
-				<h1 className='titleHeader'>
+		<div className={style.loginPage}>
+			<div className={style.formWrapper}>
+				<h1 className={style.titleHeader}>
 					<span> So</span>fie Portalen
 				</h1>
 				<form>
-					<div className='input-container'>
+					<div className={style.inputContainer}>
 						<label> Indtast brugernavn</label>
 						<input
 							type='text'
@@ -51,7 +54,7 @@ const Login = () => {
 						/>
 					</div>
 
-					<div className='input-container'>
+					<div className={style.inputContainer}>
 						<label> Indtast Password</label>
 						<input
 							type='password'
@@ -61,10 +64,10 @@ const Login = () => {
 					</div>
 				</form>
 				<button
-					className={`login-button ${loading ? 'loading' : ''}`}
+					className={`${style.loginButton} ${loading ? style.loading : ''}`}
 					onClick={!loading ? handleLogin : null}
 					disabled={loading}>
-					{loading ? <div className='spinner'></div> : 'Login'}
+					{loading ? <div className={style.spinner}></div> : 'Login'}
 				</button>
 			</div>
 		</div>

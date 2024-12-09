@@ -7,7 +7,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faDesktop } from '@fortawesome/free-solid-svg-icons';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
+import useAuthStore from '../../stores/AuthStore';
+
 const Nav = () => {
+	const { user, isAuthenticated } = useAuthStore();
 	return (
 		<div className={style.nav}>
 			<h1 className={style.titleHeader}>Sofie Portalen</h1>
@@ -19,17 +22,20 @@ const Nav = () => {
 						Icon={<FontAwesomeIcon icon={faBraille} />}
 					/>
 				</li>
-				<li>
-					<MenuLink
-						NavText='Users'
-						Param='user'
-						Icon={<FontAwesomeIcon icon={faUser} />}
-						SubMenu={[
-							{ label: 'Add User', path: '/user/add-user' },
-							{ label: 'Edit User', path: '/user/edit-user' },
-						]}
-					/>
-				</li>
+				{user.role === 'admin' && (
+					<li>
+						<MenuLink
+							NavText='Users'
+							Param='user'
+							Icon={<FontAwesomeIcon icon={faUser} />}
+							SubMenu={[
+								{ label: 'Add User', path: '/user/add-user' },
+								{ label: 'Edit User', path: '/user/edit-user' },
+							]}
+						/>
+					</li>
+				)}
+
 				<li>
 					<MenuLink
 						NavText='Machines'

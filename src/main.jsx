@@ -7,6 +7,7 @@ import { element } from 'prop-types';
 import Portal from './views/Portal.jsx';
 import UserView from './views/UserView.jsx';
 import Machines from './views/machines/Machines.jsx';
+import AddUser from './views/addUser/AddUser.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
 					{ index: true, element: <UserView /> },
 					{
 						path: 'add-user',
-						element: <h1>Add User</h1>,
+						element: <AddUser />,
 					},
 					{
 						path: 'edit-user',

@@ -1,32 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from './table.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import InitialIcon from '../components/initialIcon/InitialIcon';
 
 const Table = () => {
-	const data = [
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-		{ user: 'Afvikling D', label: 'Afv.D', team: 'Gallery Automation' },
-	];
+	const [users, setUsers] = useState([]);
+	const navigate = useNavigate();
+
+	const fetchUsers = async () => {
+		try {
+			const response = await fetch('http://localhost:3000/api/users/users', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			const data = await response.json();
+			setUsers(data.users);
+			console.log(data);
+		} catch (error) {
+			console.log('' + error);
+		}
+	};
+
+	useEffect(() => {
+		fetchUsers();
+	}, []);
 
 	return (
 		<div className={style.container}>
@@ -35,32 +37,38 @@ const Table = () => {
 				<thead>
 					<tr>
 						<th>User</th>
-						<th>Label</th>
+						<th>Role</th>
 						<th>Team</th>
-						<th></th>
+						<th
+							onClick={() => navigate('/user/add-user')}
+							className={style.addIcon}>
+							<FontAwesomeIcon icon={faSquarePlus} />
+						</th>
 					</tr>
 				</thead>
 				<tbody>
-					{data.map((row, index) => (
-						<tr key={index}>
-							<td className={style.userCell}>
-								<InitialIcon Initial={row.user[0]} />
-								<span>{row.user}</span>
-							</td>
-							<td>{row.label}</td>
-							<td>{row.team}</td>
-							<td>
-								<button className={style.editButton}>
-									<svg
-										xmlns='http://www.w3.org/2000/svg'
-										viewBox='0 0 24 24'
-										className={style.editIcon}>
-										<path d='M3 17.25V21h3.75l11-11-3.75-3.75-11 11zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z' />
-									</svg>
-								</button>
-							</td>
-						</tr>
-					))}
+					{users &&
+						users.length > 0 &&
+						users.map((user) => (
+							<tr key={user.id}>
+								<td className={style.userCell}>
+									<InitialIcon Initial={user.username[0]} />
+									<span>{user.username}</span>
+								</td>
+								<td>{user.role}</td>
+								<td>{user.department}</td>
+								<td>
+									<button className={style.editButton}>
+										<svg
+											xmlns='http://www.w3.org/2000/svg'
+											viewBox='0 0 24 24'
+											className={style.editIcon}>
+											<path d='M3 17.25V21h3.75l11-11-3.75-3.75-11 11zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z' />
+										</svg>
+									</button>
+								</td>
+							</tr>
+						))}
 				</tbody>
 			</table>
 		</div>

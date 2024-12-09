@@ -13,12 +13,17 @@ class LoginUser {
 			throw new Error('Invalid username or password');
 		}
 
+		const userRole = await this.userRepository.findByRole(user.role);
+		if (!userRole) {
+			throw new Error('no role assigned');
+		}
+
 		const isPasswordValid = await bcrypt.compare(password, user.password);
 		if (!isPasswordValid) {
 			throw new Error('Invalid username or password');
 		}
 
-		return { id: user._id, username: user.username };
+		return { id: user._id, username: user.username, role: user.role };
 	}
 }
 

@@ -5,14 +5,17 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import InitialIcon from '../components/initialIcon/InitialIcon';
 import PortalInfoSheet from '../components/portalInfoSheet/PortalInfoSheet';
 import MachineAccesInfo from '../components/machineAcces/MachineAccesInfo';
+import useAuthStore from '../stores/AuthStore';
 
 const Portal = () => {
+	const { user, isAuthenticated } = useAuthStore();
 	return (
 		<div className={style.rowWrapper}>
 			<div className={style.portalWrapper}>
 				<div className={style.menuHeaderWrapper}>
 					<p className={style.menuHeader}>
-						Current User <span className={style.thinFont}> AFD lyd </span>
+						Current User{' '}
+						<span className={style.thinFont}> {user.username} </span>
 					</p>
 
 					<div className={style.iconWrapper}>
@@ -22,7 +25,7 @@ const Portal = () => {
 				</div>
 				<hr />
 				<div className={style.userInfoWrapper}>
-					<InitialIcon Initial='D' />
+					<InitialIcon Initial={user.username[0]} />
 					<p className={style.menuHeader}>
 						User ID <span className={style.thinFont}> AFVD </span>
 					</p>
