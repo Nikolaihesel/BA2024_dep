@@ -5,26 +5,32 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import PortalInfoSheet from '../../components/portalInfoSheet/PortalInfoSheet.jsx';
 
 const Machines = () => {
-	const [room, setRoom] = useState([]);
+	const [rooms, setRooms] = useState([]);
+	const [loading, setLoading] = useState(true);
 
-	const getRooms = async () => {
+	const getRoomsWithMachines = async () => {
 		try {
-			const response = await fetch('http://localhost:3000/api/rooms/', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+			const response = await fetch(
+				'http://localhost:3000/api/rooms/get-all-rooms-with-machines',
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 			const data = await response.json();
 			console.log(data);
-			setRoom(data.rooms);
+			setRooms(data.rooms);
+			setLoading(false);
 		} catch (error) {
-			console.error('Error fetching rooms:', error);
+			console.error('Error fetching rooms with machines:', error);
+			setLoading(false);
 		}
 	};
 
 	useEffect(() => {
-		getRooms();
+		getRoomsWithMachines();
 	}, []);
 
 	return (
@@ -48,22 +54,34 @@ const Machines = () => {
 				<hr />
 
 				<div className={style.unitWrapper}>
-					{room &&
-						room.map((room, index) => (
+					{loading ? (
+						<p>Loading...</p>
+					) : rooms.length > 0 ? (
+						rooms.map((room, index) => (
 							<div
 								className={style.unit}
-								key={index}>
+								key={room._id || index}>
 								<p className={style.unitTitle}>{room.name}</p>
-
-								<button className={style.selectButton}>Q1</button>
-								<button className={style.selectButton}>Q1</button>
-								<button className={style.selectButton}>Q1</button>
-								<button className={style.selectButton}>Q1</button>
-								<button className={style.selectButton}>Q1</button>
-								<button className={style.selectButton}>Q1</button>
-								<button className={style.selectButton}>Q1</button>
+								{room.machines && room.machines.length > 0 ? (
+									room.machines.map((machine) => (
+										<button
+											className={
+												machine.state === 'running'
+													? `${style.selectButtonActive} running`
+													: style.selectButton
+											}
+											key={machine._id}>
+											{machine.name}
+										</button>
+									))
+								) : (
+									<p>No machines in this room</p>
+								)}
 							</div>
-						))}
+						))
+					) : (
+						<p>No rooms available</p>
+					)}
 				</div>
 			</div>
 			<PortalInfoSheet />

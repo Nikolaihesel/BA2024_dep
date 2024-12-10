@@ -8,6 +8,7 @@ import Portal from './views/Portal.jsx';
 import UserView from './views/UserView.jsx';
 import Machines from './views/machines/Machines.jsx';
 import AddUser from './views/addUser/AddUser.jsx';
+import SocketTest from './components/SocketTest.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'restart',
-				element: <h1>Restart</h1>,
+				element: <SocketTest />,
 			},
 		],
 	},

@@ -39,6 +39,34 @@ const roomController = {
 		}
 	},
 
+	async getRoomWithMachines(req, res) {
+		const roomRepository = new RoomRepository();
+
+		try {
+			const { roomId } = req.body;
+			const room = await roomRepository.findRoomByIdWithMachines(roomId);
+
+			if (!room) {
+				return res.status(404).json({ message: 'Room not found' });
+			}
+
+			res.status(200).json({ room });
+		} catch (error) {
+			res.status(500).json({ message: error.message });
+		}
+	},
+
+	async getAllRoomsWithMachines(req, res) {
+		const roomRepository = new RoomRepository();
+
+		try {
+			const rooms = await roomRepository.findAllRoomsWithMachines();
+			res.status(200).json({ rooms });
+		} catch (error) {
+			res.status(500).json({ message: error.message });
+		}
+	},
+
 	async deleteRoom(req, res) {
 		const roomRepository = new RoomRepository();
 		const { roomId } = req.body;

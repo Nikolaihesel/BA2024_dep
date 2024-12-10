@@ -4,7 +4,7 @@ const { Server } = require('socket.io');
 const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./infrastructure/database/mongoose');
-const socketHandlers = require('./infrastructure/websocket/index');
+const socketHandlers = require('./interfaces/websocket/machineSockets');
 
 const app = express();
 const server = http.createServer(app);
@@ -16,13 +16,10 @@ const io = new Server(server, {
 });
 
 app.use(cors());
-
+app.use(express.json());
 connectDB();
 
-app.use(express.json());
-
 const routes = require('./interfaces/http/routes');
-
 app.use('/api', routes);
 
 socketHandlers(io);

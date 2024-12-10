@@ -13,12 +13,15 @@ const Portal = () => {
 
 	const getRooms = async () => {
 		try {
-			const response = await fetch('http://localhost:3000/api/rooms/', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+			const response = await fetch(
+				'http://localhost:3000/api/rooms/get-all-rooms-with-machines',
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 			const data = await response.json();
 			console.log(data);
 			setRoom(data.rooms);

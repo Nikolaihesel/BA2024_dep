@@ -1,10 +1,10 @@
 import style from './machineTimer.module.scss';
 
-const MachineTimer = () => {
+const MachineTimer = ({ Name, Uptime }) => {
 	return (
 		<div className={style.machineTimer}>
 			<span className={style.title}>
-				<p>Sisyfoss</p> <p>08:32</p>
+				<p>{Name}</p> <p>{Uptime}</p>
 			</span>
 			<hr />
 		</div>

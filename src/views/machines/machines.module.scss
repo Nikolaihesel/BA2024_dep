@@ -105,6 +105,24 @@
 		filter: (brightness(0.8));
 	}
 }
+.selectButtonActive {
+	padding: 1em 0.5em;
+	background: #87e5bb;
+
+	border: none;
+	border-radius: 8px;
+	@include font-style(400, normal, $defaultLight, 16px);
+	cursor: pointer;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	transition: 0.1s ease-in;
+	min-width: 200px;
+
+	&:hover {
+		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+		filter: (brightness(0.8));
+	}
+}
 
 .unitWrapper {
 	display: flex;
