@@ -8,7 +8,7 @@ import MachineAccesInfo from '../components/machineAcces/MachineAccesInfo';
 import useAuthStore from '../stores/AuthStore';
 
 const Portal = () => {
-	const { user, isAuthenticated } = useAuthStore();
+	const { user } = useAuthStore();
 	const [room, setRoom] = useState([]);
 
 	const getRooms = async () => {

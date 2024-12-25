@@ -159,6 +159,14 @@
 			padding: 0.5em;
 			filter: brightness(2);
 			z-index: 1;
+
+			p {
+				cursor: pointer;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+			}
 		}
 	}
 }

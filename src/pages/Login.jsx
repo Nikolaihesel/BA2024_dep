@@ -7,7 +7,7 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-	const { login, user: storedUser } = useAuthStore.getState();
+	const { login } = useAuthStore.getState();
 
 	const handleLogin = async () => {
 		setLoading(true);
@@ -69,6 +69,8 @@ const Login = () => {
 					disabled={loading}>
 					{loading ? <div className={style.spinner}></div> : 'Login'}
 				</button>
+
+				{error && <p className={style.error}>{error}</p>}
 			</div>
 		</div>
 	);

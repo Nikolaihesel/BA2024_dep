@@ -82,20 +82,19 @@ const PortalInfoSheet = () => {
 	return (
 		<div className={style.portalInfo}>
 			<p className={style.portalInfoHeader}>Live Machines</p>
-
-			{machines &&
-				machines.map((machine) => (
-					<MachineTimer
-						key={machine._id}
-						Name={machine.name}
-						Uptime={machine.uptime}
-					/>
-				))}
-
-			<br />
-			<br />
-			<br />
-			<ContactPortal />
+			<div className={style.timerContainer}>
+				{machines &&
+					machines.map((machine) => (
+						<MachineTimer
+							key={machine._id}
+							Name={machine.name}
+							Uptime={machine.uptime}
+						/>
+					))}
+			</div>
+			<div className={style.contactContainer}>
+				<ContactPortal />
+			</div>
 		</div>
 	);
 };

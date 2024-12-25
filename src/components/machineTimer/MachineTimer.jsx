@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import style from './machineTimer.module.scss';
 
 const MachineTimer = ({ Name, Uptime }) => {
@@ -9,6 +11,11 @@ const MachineTimer = ({ Name, Uptime }) => {
 			<hr />
 		</div>
 	);
+};
+
+MachineTimer.propTypes = {
+	Name: PropTypes.string.isRequired,
+	Uptime: PropTypes.string.isRequired,
 };
 
 export default MachineTimer;

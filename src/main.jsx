@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import ErrorPage from './Errorpage.jsx';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { element } from 'prop-types';
 import Portal from './views/Portal.jsx';
 import UserView from './views/UserView.jsx';
 import Machines from './views/machines/Machines.jsx';
 import AddUser from './views/addUser/AddUser.jsx';
 import SocketTest from './components/SocketTest.jsx';
+import MachinePage from './components/MachinePage.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -40,6 +40,11 @@ const router = createBrowserRouter([
 				path: 'machines',
 				element: <Machines />,
 			},
+			{
+				path: 'machine',
+				element: <MachinePage />,
+			},
+
 			{
 				path: 'restart',
 				element: <SocketTest />,

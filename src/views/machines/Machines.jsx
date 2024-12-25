@@ -1,10 +1,14 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from './machines.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faUser } from '@fortawesome/free-solid-svg-icons';
+
 import PortalInfoSheet from '../../components/portalInfoSheet/PortalInfoSheet.jsx';
 
 const Machines = () => {
+	const navigate = useNavigate();
 	const [rooms, setRooms] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -61,7 +65,14 @@ const Machines = () => {
 							<div
 								className={style.unit}
 								key={room._id || index}>
-								<p className={style.unitTitle}>{room.name}</p>
+								<div
+									className={style.unitTitle}
+									onClick={() => navigate('/machine')}>
+									<p>
+										{room.name} <FontAwesomeIcon icon={faArrowRight} />
+									</p>
+								</div>
+
 								{room.machines && room.machines.length > 0 ? (
 									room.machines.map((machine) => (
 										<button

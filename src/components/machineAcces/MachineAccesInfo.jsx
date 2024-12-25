@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import style from './machineAccesInfo.module.scss';
 
 const MachineAccesInfo = ({ data }) => {
@@ -26,6 +27,20 @@ const MachineAccesInfo = ({ data }) => {
 			</table>
 		</div>
 	);
+};
+
+MachineAccesInfo.propTypes = {
+	data: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		machines: PropTypes.arrayOf(
+			PropTypes.shape({
+				name: PropTypes.string.isRequired,
+				state: PropTypes.string.isRequired,
+				value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+					.isRequired,
+			})
+		).isRequired,
+	}).isRequired,
 };
 
 export default MachineAccesInfo;

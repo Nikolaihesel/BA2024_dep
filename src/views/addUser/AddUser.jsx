@@ -57,7 +57,7 @@ const AddUser = () => {
 								name='role'
 								id='role'
 								onChange={(e) => setRole(e.target.value)}>
-								<option initialvalue='true'>Select Role</option>
+								<option defaultValue='true'>Select Role</option>
 								<option value='admin'>Admin</option>
 								<option value='user'>User</option>
 							</select>
@@ -68,7 +68,7 @@ const AddUser = () => {
 								name='department'
 								id='department'
 								onChange={(e) => setDepartment(e.target.value)}>
-								<option initialvalue='true'>Select Department</option>
+								<option defaultValue='true'>Select Department</option>
 								<option value='Afd Lyd'>Afd. Lyd</option>
 								<option value='Afd D'>Afd. D</option>
 								<option value='Afd S'>Afd. S</option>
