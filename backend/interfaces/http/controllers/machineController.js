@@ -2,6 +2,35 @@ const RoomRepository = require('../../../infrastructure/repositories/RoomReposit
 const MachineRepository = require('../../../infrastructure/repositories/MachineRepository');
 
 const machineController = {
+	async startMachineHelper(machineId) {
+		const machineRepository = new MachineRepository();
+		const machine = await machineRepository.getMachine(machineId);
+
+		if (!machine) {
+			throw new Error('Machine not found');
+		}
+
+		machine.state = 'running';
+		machine.connectedAt = new Date();
+		await machine.save();
+
+		return machine;
+	},
+
+	async stopMachineHelper(machineId) {
+		const machineRepository = new MachineRepository();
+		const machine = await machineRepository.getMachine(machineId);
+
+		if (!machine) {
+			throw new Error('Machine not found');
+		}
+
+		machine.state = 'stopped';
+		await machine.save();
+
+		return machine;
+	},
+
 	async addMachine(req, res) {
 		const machineRepository = new MachineRepository();
 		const roomRepository = new RoomRepository();
@@ -24,15 +53,23 @@ const machineController = {
 		}
 	},
 
-	async stopMachine(req, res) {
-		const machineRepository = new MachineRepository();
-
+	async startMachine(req, res) {
 		try {
 			const { id } = req.body;
+			const machine = await machineController.startMachineHelper(id);
 
-			const machine = await machineRepository.getMachine(id);
-			machine.state = 'stopped';
-			await machine.save();
+			res
+				.status(200)
+				.json({ message: `Machine ${id} started successfully`, machine });
+		} catch (error) {
+			res.status(400).json({ message: error.message });
+		}
+	},
+
+	async stopMachine(req, res) {
+		try {
+			const { id } = req.body;
+			const machine = await machineController.stopMachineHelper(id);
 
 			res.status(200).json({ message: `Machine ${id} stopped successfully` });
 		} catch (error) {
@@ -58,28 +95,6 @@ const machineController = {
 		}
 	},
 
-	async startMachine(req, res) {
-		const machineRepository = new MachineRepository();
-
-		try {
-			const { id } = req.body;
-
-			const machine = await machineRepository.getMachine(id);
-			if (!machine) {
-				return res.status(404).json({ message: 'Machine not found' });
-			}
-
-			machine.state = 'running';
-			machine.connectedAt = new Date();
-			await machine.save();
-
-			res
-				.status(200)
-				.json({ message: `Machine ${id} started successfully`, machine });
-		} catch (error) {
-			res.status(400).json({ message: error.message });
-		}
-	},
 	async listRunningMachines(req, res) {
 		const machineRepository = new MachineRepository();
 

@@ -18,12 +18,27 @@ class LoginUser {
 			throw new Error('no role assigned');
 		}
 
+		const userWithDepartments = await this.userRepository.findUserDepartments(
+			user._id
+		);
+		if (
+			!userWithDepartments.departments ||
+			userWithDepartments.departments.length === 0
+		) {
+			throw new Error('No department assigned');
+		}
+
 		const isPasswordValid = await bcrypt.compare(password, user.password);
 		if (!isPasswordValid) {
 			throw new Error('Invalid username or password');
 		}
 
-		return { id: user._id, username: user.username, role: user.role };
+		return {
+			id: user._id,
+			username: user.username,
+			role: user.role,
+			departments: userWithDepartments.departments,
+		};
 	}
 }
 

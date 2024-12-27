@@ -1,5 +1,4 @@
 import React from 'react';
-
 import MenuLink from '../components/Links/MenuLink'; // Update the path if needed
 
 export default {

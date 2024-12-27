@@ -67,7 +67,11 @@ const Machines = () => {
 								key={room._id || index}>
 								<div
 									className={style.unitTitle}
-									onClick={() => navigate('/machine')}>
+									onClick={() =>
+										navigate('/machinecontroller', {
+											state: { roomId: room._id },
+										})
+									}>
 									<p>
 										{room.name} <FontAwesomeIcon icon={faArrowRight} />
 									</p>

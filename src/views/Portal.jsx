@@ -62,6 +62,21 @@ const Portal = () => {
 				<div className={style.userAccessWrapper}>
 					<div className={style.menuHeaderWrapper}>
 						<p className={style.menuHeader}>User Access Rights</p>
+
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								gap: '.5em',
+							}}>
+							<p className={style.menuHeader}>Department</p>
+							<select
+								name='department'
+								id='derpartment'>
+								<option value='  '>Vælg afdeling</option>
+							</select>
+						</div>
 						{user.role === 'admin' && (
 							<div className={style.iconWrapper}>
 								<FontAwesomeIcon icon={faUser} />

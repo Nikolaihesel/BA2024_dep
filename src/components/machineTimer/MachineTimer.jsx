@@ -6,7 +6,7 @@ const MachineTimer = ({ Name, Uptime }) => {
 	return (
 		<div className={style.machineTimer}>
 			<span className={style.title}>
-				<p>{Name}</p> <p>{Uptime}</p>
+				<p>{Name}</p> <p className={style.uptime}>{Uptime}</p>
 			</span>
 			<hr />
 		</div>

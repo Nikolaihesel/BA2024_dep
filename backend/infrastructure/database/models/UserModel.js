@@ -12,11 +12,12 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	department: {
-		type: String,
-		required: true,
-		lowercase: true,
-	},
+	departments: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Department',
+		},
+	],
 	role: {
 		type: String,
 		required: true,

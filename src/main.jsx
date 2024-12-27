@@ -9,6 +9,8 @@ import Machines from './views/machines/Machines.jsx';
 import AddUser from './views/addUser/AddUser.jsx';
 import SocketTest from './components/SocketTest.jsx';
 import MachinePage from './components/MachinePage.jsx';
+import MachineControls from './views/machineControls/MachineControls.jsx';
+import RoomProvider from './contextProviders/RoomContextProvider.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -43,6 +45,11 @@ const router = createBrowserRouter([
 			{
 				path: 'machine',
 				element: <MachinePage />,
+			},
+			{
+				path: 'machinecontroller',
+				element: <RoomProvider />,
+				children: [{ index: true, element: <MachineControls /> }],
 			},
 
 			{

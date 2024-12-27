@@ -20,6 +20,30 @@ class UserRepository {
 	async findById(id) {
 		return await User.findById(id);
 	}
+
+	async findUserDepartments(userId) {
+		const user = await this.findById(userId);
+		if (!user) {
+			throw new Error(`User with ID ${userId} not found.`);
+		}
+
+		return await User.findById(userId).populate('departments');
+	}
+
+	async addDepartment(userId, departmentId) {
+		const user = await this.findById(userId);
+		if (!user) {
+			throw new Error(`User with ID ${userId} not found.`);
+		}
+
+		if (user.departments.includes(departmentId)) {
+			return false;
+		}
+
+		user.departments.push(departmentId);
+		await user.save();
+		return true;
+	}
 }
 
 module.exports = UserRepository;

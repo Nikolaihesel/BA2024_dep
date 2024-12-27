@@ -1,0 +1,140 @@
+@use '../../styles/textStyles.scss' as *;
+@use '../../styles/variables.scss' as *;
+
+.roomHeader {
+	@include font-style(600, normal, $primColor, 24px);
+	margin: 0.5em 1em;
+}
+
+.seperator {
+	width: calc(100% - 2em);
+	border: 1px solid #dedede;
+	margin: auto;
+}
+
+.machineButtonContainer {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1em;
+	width: 100%;
+	margin: 1em;
+	flex-wrap: wrap;
+}
+
+.active {
+	background: $primColor;
+	color: $defaultLight;
+	border: 1px solid $primColor;
+	&:hover {
+		background: $primColor;
+		color: $defaultLight;
+		border: 1px solid $primColor;
+	}
+}
+
+.machineButton {
+	padding: 0.5em 0.3em;
+	background: #eceff5;
+	border: none;
+	border-radius: 8px;
+	@include font-style(400, normal, $primColor, 16px);
+	cursor: pointer;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	transition: 0.1s ease-in;
+	min-width: 100px;
+
+	&:hover {
+		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+		filter: (brightness(0.8));
+	}
+}
+
+.machineButtonSelected {
+	padding: 0.5em 0.3em;
+	background: #eceff5;
+	border: none;
+	border-radius: 8px;
+	@include font-style(400, normal, $primColor, 16px);
+	cursor: pointer;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	transition: 0.1s ease-in;
+	min-width: 100px;
+	border: lightblue 1px solid;
+
+	&:hover {
+		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+		filter: (brightness(0.8));
+	}
+}
+.machineButtonActive {
+	padding: 0.5em 0.3em;
+	background: #87e5bb;
+	border: none;
+	border-radius: 8px;
+	@include font-style(400, normal, $defaultLight, 16px);
+	cursor: pointer;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	transition: 0.1s ease-in;
+	min-width: 100px;
+	&:hover {
+		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+		filter: (brightness(0.8));
+	}
+}
+
+.machineControlContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	gap: 1em;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.rangeWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 5em;
+	width: 100%;
+	margin: 1em;
+	flex: 1;
+}
+
+.buttonContainerControl {
+	flex: 2;
+	display: flex;
+	align-items: center;
+	justify-self: center;
+	gap: 2em;
+	padding: 2em;
+
+	button {
+		padding: 0.5em 0.3em;
+		background: #eceff5;
+		border: none;
+		border-radius: 8px;
+		@include font-style(400, normal, $primColor, 16px);
+		cursor: pointer;
+		box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+		text-align: center;
+		transition: 0.1s ease-in;
+		min-width: 100px;
+
+		&:hover {
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+			filter: (brightness(0.8));
+		}
+	}
+}
+
+.rangeInput {
+	transform: rotate(-90deg);
+}
