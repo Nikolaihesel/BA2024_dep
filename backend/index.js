@@ -9,17 +9,28 @@ const socketHandlers = require('./interfaces/websocket/machineSockets');
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, {
-	cors: {
-		origin: '*',
-	},
-});
+const allowedOrigins = ['http://localhost:5173', 'https://ba2024.onrender.com'];
 
 app.use(
 	cors({
-		origin: '*',
+		origin: (origin, callback) => {
+			if (!origin || allowedOrigins.includes(origin)) {
+				callback(null, true);
+			} else {
+				callback(new Error('Not allowed by CORS'));
+			}
+		},
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+		credentials: true,
 	})
 );
+
+const io = new Server(server, {
+	cors: {
+		origin: allowedOrigins,
+		methods: ['GET', 'POST'],
+	},
+});
 
 app.use(cors());
 app.use(express.json());
