@@ -36,6 +36,29 @@ class DepartmentRepository {
 		return true;
 	}
 
+	async addRoom(departmentId, roomId) {
+		const department = await this.findById(departmentId);
+		if (!department) {
+			throw new Error(`Department with ID ${departmentId} not found.`);
+		}
+
+		if (
+			department.rooms &&
+			department.rooms.some((existingRoomId) => existingRoomId.equals(roomId))
+		) {
+			return false;
+		}
+
+		if (!department.rooms) {
+			department.rooms = [];
+		}
+
+		department.rooms.push(roomId);
+
+		await department.save();
+		return true;
+	}
+
 	async addMachine(departmentId, machineId) {
 		return await Department.findByIdAndUpdate(
 			departmentId,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Nav.module.scss';
 import MenuLink from '../Links/MenuLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,13 +11,15 @@ import useAuthStore from '../../stores/AuthStore';
 
 const Nav = () => {
 	const { user } = useAuthStore();
+	const [isCollapsed, setIsCollapsed] = useState(false);
 	return (
 		<div className={style.nav}>
 			<h1 className={style.titleHeader}>Sofie Portalen</h1>
+			{/* <button onClick={() => setIsCollapsed(!isCollapsed)}> collapse</button> */}
 			<ul>
 				<li>
 					<MenuLink
-						NavText='Portal'
+						NavText={isCollapsed ? '' : 'Portal'}
 						Param='/'
 						Icon={<FontAwesomeIcon icon={faBraille} />}
 					/>
@@ -25,8 +27,9 @@ const Nav = () => {
 				{user.role === 'admin' && (
 					<li>
 						<MenuLink
-							NavText='Users'
+							NavText={isCollapsed ? '' : 'Users'}
 							Param='user'
+							isCollapsed={isCollapsed}
 							Icon={<FontAwesomeIcon icon={faUser} />}
 							SubMenu={[
 								{ label: 'Add User', path: '/user/add-user' },
@@ -38,14 +41,14 @@ const Nav = () => {
 
 				<li>
 					<MenuLink
-						NavText='Machines'
+						NavText={isCollapsed ? '' : 'Machines'}
 						Param='machines'
 						Icon={<FontAwesomeIcon icon={faDesktop} />}
 					/>
 				</li>
 				<li>
 					<MenuLink
-						NavText='Restart'
+						NavText={isCollapsed ? '' : 'Restart'}
 						Param='restart'
 						Icon={<FontAwesomeIcon icon={faPowerOff} />}
 					/>

@@ -73,8 +73,16 @@ const Portal = () => {
 							<p className={style.menuHeader}>Department</p>
 							<select
 								name='department'
-								id='derpartment'>
+								id='department'>
 								<option value='  '>Vælg afdeling</option>
+								{user.departments &&
+									user.departments.map((department) => (
+										<option
+											key={department._id}
+											value={department._id}>
+											{department.departmentName}
+										</option>
+									))}
 							</select>
 						</div>
 						{user.role === 'admin' && (

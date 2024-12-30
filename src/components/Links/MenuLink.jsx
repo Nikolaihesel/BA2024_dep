@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import style from '../Links/MenuLink.module.scss';
 
-const MenuLink = ({ NavText, Param, Icon, SubMenu }) => {
+const MenuLink = ({ NavText, Param, Icon, SubMenu, isCollapsed }) => {
 	const [showSub, setShowSub] = useState(false);
 
 	return (
@@ -18,7 +18,7 @@ const MenuLink = ({ NavText, Param, Icon, SubMenu }) => {
 						isActive ? style.navlinkActive : style.navlink
 					}>
 					{Icon && <span className={style.icon}>{Icon}</span>}
-					{NavText}
+					{isCollapsed ? '' : NavText}
 				</NavLink>
 			</div>
 
@@ -44,6 +44,7 @@ const MenuLink = ({ NavText, Param, Icon, SubMenu }) => {
 MenuLink.propTypes = {
 	NavText: PropTypes.string.isRequired,
 	Param: PropTypes.string.isRequired,
+	isCollapsed: PropTypes.bool,
 	Icon: PropTypes.node,
 	SubMenu: PropTypes.arrayOf(
 		PropTypes.shape({
