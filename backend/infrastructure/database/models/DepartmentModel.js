@@ -20,6 +20,5 @@ const DepartmentSchema = new mongoose.Schema({
 		default: [],
 	},
 });
-DepartmentSchema.index({ departmentName: 1 }, { unique: true });
 
 module.exports = mongoose.model('Department', DepartmentSchema);
