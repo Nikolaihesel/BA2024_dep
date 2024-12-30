@@ -7,7 +7,11 @@ const connectDB = require('./infrastructure/database/mongoose');
 const socketHandlers = require('./interfaces/websocket/machineSockets');
 const app = express();
 const server = http.createServer(app);
-const allowedOrigins = ['http://localhost:5173', 'https://ba2024.onrender.com'];
+const allowedOrigins = [
+	'http://localhost:5173',
+	'https://ba2024.onrender.com',
+	'https://ba-2024-crh26s0rt-nikolaihesels-projects.vercel.app/',
+];
 
 const io = new Server(server, {
 	cors: {
