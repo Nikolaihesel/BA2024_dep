@@ -13,13 +13,7 @@ const allowedOrigins = ['http://localhost:5173', 'https://ba2024.onrender.com'];
 
 app.use(
 	cors({
-		origin: (origin, callback) => {
-			if (!origin || allowedOrigins.includes(origin)) {
-				callback(null, true);
-			} else {
-				callback(new Error('Not allowed by CORS'));
-			}
-		},
+		origin: allowedOrigins,
 		methods: ['GET', 'POST', 'PUT', 'DELETE'],
 		credentials: true,
 	})
