@@ -21,6 +21,18 @@ class UserRepository {
 		return await User.findById(id);
 	}
 
+	async updateUser(userId, userData) {
+		const user = await User.findById(userId);
+		if (!user) {
+			throw new Error(`User with ID ${userId} not found.`);
+		}
+
+		Object.assign(user, userData);
+
+		await user.save();
+		return user;
+	}
+
 	async findUserDepartments(userId) {
 		const user = await this.findById(userId);
 		if (!user) {

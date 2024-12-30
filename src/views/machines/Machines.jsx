@@ -15,7 +15,7 @@ const Machines = () => {
 	const getRoomsWithMachines = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:3000/api/rooms/get-all-rooms-with-machines',
+				'https://ba2024.onrender.com/api/rooms/get-all-rooms-with-machines',
 				{
 					method: 'GET',
 					headers: {

@@ -31,10 +31,7 @@ const Nav = () => {
 							Param='user'
 							isCollapsed={isCollapsed}
 							Icon={<FontAwesomeIcon icon={faUser} />}
-							SubMenu={[
-								{ label: 'Add User', path: '/user/add-user' },
-								{ label: 'Edit User', path: '/user/edit-user' },
-							]}
+							SubMenu={[{ label: 'Add User', path: '/user/add-user' }]}
 						/>
 					</li>
 				)}

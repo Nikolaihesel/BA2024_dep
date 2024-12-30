@@ -48,6 +48,16 @@ const userController = {
 		}
 	},
 
+	async updateUser(req, res) {
+		const userRepository = new UserRepository();
+		try {
+			const updatedUser = await userRepository.updateUser(req.body);
+			res.status(200).json({ message: updatedUser });
+		} catch (error) {
+			res.status(500).json({ message: error.message });
+		}
+	},
+
 	async fetchAll(req, res) {
 		const userRepository = new UserRepository();
 		const fetchAllUsers = new FetchAllUsers(userRepository);

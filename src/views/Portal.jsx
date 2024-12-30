@@ -8,30 +8,50 @@ import MachineAccesInfo from '../components/machineAcces/MachineAccesInfo';
 import useAuthStore from '../stores/AuthStore';
 
 const Portal = () => {
-	const { user } = useAuthStore();
-	const [room, setRoom] = useState([]);
+	const { user } = useAuthStore(); // Current user information
+	const [departments, setDepartments] = useState([]); // Store all departments
+	const [rooms, setRooms] = useState([]); // Store rooms of selected department
+	const [selectedDepartment, setSelectedDepartment] = useState(''); // Selected department ID
 
-	const getRooms = async () => {
+	// Fetch departments and filter based on user
+	const getDepartments = async () => {
 		try {
-			const response = await fetch(
-				'http://localhost:3000/api/rooms/get-all-rooms-with-machines',
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			);
+			const response = await fetch('http://localhost:3000/api/departments/', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 			const data = await response.json();
 			console.log(data);
-			setRoom(data.rooms);
+
+			// Extract user-specific departments
+			const userDepartments = data.departments.filter((dept) =>
+				user.departments.some((userDept) => userDept._id === dept._id)
+			);
+
+			setDepartments(userDepartments); // Set user-specific departments
+			if (userDepartments.length > 0) {
+				setSelectedDepartment(userDepartments[0]._id); // Default to first department
+				setRooms(userDepartments[0].rooms); // Default to first department's rooms
+			}
 		} catch (error) {
-			console.error('Error fetching rooms:', error);
+			console.error('Error fetching departments:', error);
 		}
 	};
 
+	// Handle department selection
+	const handleDepartmentChange = (event) => {
+		const departmentId = event.target.value;
+		setSelectedDepartment(departmentId);
+
+		// Find the selected department and update rooms
+		const selectedDept = departments.find((dept) => dept._id === departmentId);
+		setRooms(selectedDept ? selectedDept.rooms : []);
+	};
+
 	useEffect(() => {
-		getRooms();
+		getDepartments();
 	}, []);
 
 	return (
@@ -73,16 +93,17 @@ const Portal = () => {
 							<p className={style.menuHeader}>Department</p>
 							<select
 								name='department'
-								id='department'>
-								<option value='  '>Vælg afdeling</option>
-								{user.departments &&
-									user.departments.map((department) => (
-										<option
-											key={department._id}
-											value={department._id}>
-											{department.departmentName}
-										</option>
-									))}
+								id='department'
+								value={selectedDepartment}
+								onChange={handleDepartmentChange}>
+								<option value=''>Select Department</option>
+								{departments.map((department) => (
+									<option
+										key={department._id}
+										value={department._id}>
+										{department.departmentName}
+									</option>
+								))}
 							</select>
 						</div>
 						{user.role === 'admin' && (
@@ -95,14 +116,17 @@ const Portal = () => {
 
 					<hr />
 					<div className={style.machineAccessInfo}>
-						{room &&
-							room.length > 0 &&
-							room.map((room, index) => (
+						{/* Render filtered rooms */}
+						{rooms.length > 0 ? (
+							rooms.map((room) => (
 								<MachineAccesInfo
-									key={index}
+									key={room._id}
 									data={room}
 								/>
-							))}
+							))
+						) : (
+							<p>No rooms available for the selected department.</p>
+						)}
 					</div>
 				</div>
 			</div>

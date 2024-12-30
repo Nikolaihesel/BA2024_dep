@@ -3,7 +3,7 @@ import { useOutletContext, useLocation, useNavigate } from 'react-router-dom';
 import style from './machineControls.module.scss';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3000');
+const socket = io('https://ba2024.onrender.com');
 
 const MachineControls = () => {
 	const { rooms } = useOutletContext();

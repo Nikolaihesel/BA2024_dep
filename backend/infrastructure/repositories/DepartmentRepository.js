@@ -1,9 +1,19 @@
 const Department = require('../database/models/DepartmentModel');
+const Room = require('../database/models/RoomModel');
 
 class DepartmentRepository {
 	async create(departmentData) {
 		const department = new Department(departmentData);
 		return await department.save();
+	}
+
+	async fetchAllWithRooms() {
+		return await Department.find().populate({
+			path: 'rooms',
+			populate: {
+				path: 'machines',
+			},
+		});
 	}
 
 	async fetchAll() {

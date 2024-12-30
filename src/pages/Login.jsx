@@ -15,7 +15,7 @@ const Login = () => {
 
 		try {
 			const response = await fetch(
-				'http://ba2024.onrender.com/api/users/login',
+				'https://ba2024.onrender.com/api/users/login',
 				{
 					method: 'POST',
 					headers: {

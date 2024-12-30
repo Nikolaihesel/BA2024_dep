@@ -77,6 +77,18 @@ const departmentController = {
 			res.status(400).json({ message: error.message });
 		}
 	},
+
+	async fetchAll(req, res) {
+		const departmentRepository = new DepartmentRepository();
+
+		try {
+			const departments = await departmentRepository.fetchAllWithRooms();
+
+			res.status(200).json({ departments });
+		} catch (error) {
+			res.status(400).json({ message: error.message });
+		}
+	},
 };
 
 module.exports = departmentController;

@@ -11,12 +11,15 @@ const Table = () => {
 
 	const fetchUsers = async () => {
 		try {
-			const response = await fetch('http://localhost:3000/api/users/users', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+			const response = await fetch(
+				'https://ba2024.onrender.com/api/users/users',
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 
 			const data = await response.json();
 			setUsers(data.users);

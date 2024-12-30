@@ -9,7 +9,7 @@ const RoomContextProvider = () => {
 		const fetchRooms = async () => {
 			try {
 				const response = await fetch(
-					'http://localhost:3000/api/rooms/get-all-rooms-with-machines'
+					'https://ba2024.onrender.com/api/rooms/get-all-rooms-with-machines'
 				);
 				const data = await response.json();
 				setRooms(data.rooms);
