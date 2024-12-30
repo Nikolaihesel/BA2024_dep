@@ -8,44 +8,39 @@ import MachineAccesInfo from '../components/machineAcces/MachineAccesInfo';
 import useAuthStore from '../stores/AuthStore';
 
 const Portal = () => {
-	const { user } = useAuthStore(); // Current user information
-	const [departments, setDepartments] = useState([]); // Store all departments
-	const [rooms, setRooms] = useState([]); // Store rooms of selected department
-	const [selectedDepartment, setSelectedDepartment] = useState(''); // Selected department ID
+	const { user } = useAuthStore();
+	const [departments, setDepartments] = useState([]);
+	const [rooms, setRooms] = useState([]);
+	const [selectedDepartment, setSelectedDepartment] = useState('');
 
-	// Fetch departments and filter based on user
 	const getDepartments = async () => {
 		try {
-			const response = await fetch('http://localhost:3000/api/departments/', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+			const response = await fetch(
+				'https://ba2024.onrender.com/api/departments/',
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 			const data = await response.json();
-			console.log(data);
-
-			// Extract user-specific departments
 			const userDepartments = data.departments.filter((dept) =>
 				user.departments.some((userDept) => userDept._id === dept._id)
 			);
-
-			setDepartments(userDepartments); // Set user-specific departments
+			setDepartments(userDepartments);
 			if (userDepartments.length > 0) {
-				setSelectedDepartment(userDepartments[0]._id); // Default to first department
-				setRooms(userDepartments[0].rooms); // Default to first department's rooms
+				setSelectedDepartment(userDepartments[0]._id);
+				setRooms(userDepartments[0].rooms);
 			}
 		} catch (error) {
 			console.error('Error fetching departments:', error);
 		}
 	};
 
-	// Handle department selection
 	const handleDepartmentChange = (event) => {
 		const departmentId = event.target.value;
 		setSelectedDepartment(departmentId);
-
-		// Find the selected department and update rooms
 		const selectedDept = departments.find((dept) => dept._id === departmentId);
 		setRooms(selectedDept ? selectedDept.rooms : []);
 	};
@@ -116,7 +111,6 @@ const Portal = () => {
 
 					<hr />
 					<div className={style.machineAccessInfo}>
-						{/* Render filtered rooms */}
 						{rooms.length > 0 ? (
 							rooms.map((room) => (
 								<MachineAccesInfo
