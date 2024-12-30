@@ -5,11 +5,16 @@ const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./infrastructure/database/mongoose');
 const socketHandlers = require('./interfaces/websocket/machineSockets');
-
 const app = express();
 const server = http.createServer(app);
-
 const allowedOrigins = ['http://localhost:5173', 'https://ba2024.onrender.com'];
+
+const io = new Server(server, {
+	cors: {
+		origin: allowedOrigins,
+		methods: ['GET', 'POST'],
+	},
+});
 
 app.use(
 	cors({
@@ -19,14 +24,6 @@ app.use(
 	})
 );
 
-const io = new Server(server, {
-	cors: {
-		origin: allowedOrigins,
-		methods: ['GET', 'POST'],
-	},
-});
-
-app.use(cors());
 app.use(express.json());
 connectDB();
 
