@@ -15,6 +15,12 @@ const io = new Server(server, {
 	},
 });
 
+app.use(
+	cors({
+		origin: '*',
+	})
+);
+
 app.use(cors());
 app.use(express.json());
 connectDB();
