@@ -53,7 +53,7 @@ const PortalInfoSheet = () => {
 
 		fetchRunningMachines();
 
-		const socket = io('http://localhost:3000');
+		const socket = io('https://ba2024.onrender.com:3000');
 
 		socket.on('machineStatusUpdate', (updatedMachines) => {
 			const recalculatedMachines = updatedMachines.map((machine) => ({
