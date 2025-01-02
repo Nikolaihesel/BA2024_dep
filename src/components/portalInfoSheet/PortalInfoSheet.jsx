@@ -29,7 +29,7 @@ const PortalInfoSheet = () => {
 		const fetchRunningMachines = async () => {
 			try {
 				const response = await fetch(
-					'http://localhost:3000/api/machines/running',
+					'https://ba2024.onrender.com/api/machines/running',
 					{
 						method: 'GET',
 						headers: {
