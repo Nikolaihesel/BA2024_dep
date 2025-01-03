@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useOutletContext, useLocation, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import style from './machineControls.module.scss';
 import { io } from 'socket.io-client';
 
@@ -52,12 +54,20 @@ const MachineControls = () => {
 			socket.emit('startMachine', { machineId: selectedMachine._id });
 			setAdjustValue(e.target.value);
 		}
+		toast.success('starting...', {
+			position: 'top-center',
+			autoClose: 1000,
+		});
 	};
 
 	const handleStop = () => {
 		if (selectedMachine) {
 			socket.emit('stopMachine', { machineId: selectedMachine._id });
 		}
+		toast.success('stopping...', {
+			position: 'top-center',
+			autoClose: 1000,
+		});
 	};
 
 	const handleValueChange = (e) => {
@@ -124,6 +134,7 @@ const MachineControls = () => {
 					</div>
 				</>
 			)}
+			<ToastContainer />
 		</div>
 	);
 };
