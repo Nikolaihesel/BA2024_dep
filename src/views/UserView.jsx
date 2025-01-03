@@ -59,7 +59,7 @@ const Table = () => {
 									<span>{user.username}</span>
 								</td>
 								<td>{user.role}</td>
-								<td>{user.department}</td>
+								<td>{user.department || user.departments}</td>
 								<td>
 									<button className={style.editButton}>
 										<svg

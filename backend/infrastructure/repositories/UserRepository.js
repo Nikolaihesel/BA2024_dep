@@ -6,7 +6,7 @@ class UserRepository {
 		return await user.save();
 	}
 	async fetchAll() {
-		return await User.find().select('-password');
+		return await User.find().select('-password').populate('departments');
 	}
 
 	async findByRole(role) {
