@@ -59,7 +59,12 @@ const Table = () => {
 									<span>{user.username}</span>
 								</td>
 								<td>{user.role}</td>
-								<td>{user.department || user.departments}</td>
+								<td>
+									{user.department ||
+										user.departments?.[0]?.departmentName ||
+										'No department assigned'}
+								</td>
+
 								<td>
 									<button className={style.editButton}>
 										<svg
