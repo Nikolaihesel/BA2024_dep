@@ -15,6 +15,13 @@ class CreateUser {
 
 		userData.password = await this.hashPassword(userData.password);
 
+		const departmentId = userData.department;
+		if (departmentId) {
+			userData.departments = [departmentId];
+		} else {
+			userData.departments = [];
+		}
+
 		return await this.userRepository.create(userData);
 	}
 

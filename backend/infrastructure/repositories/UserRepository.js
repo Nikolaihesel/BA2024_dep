@@ -48,7 +48,7 @@ class UserRepository {
 			throw new Error(`User with ID ${userId} not found.`);
 		}
 
-		if (user.departments.includes(departmentId)) {
+		if (user.departments.some((dept) => dept.toString() === departmentId)) {
 			return false;
 		}
 
